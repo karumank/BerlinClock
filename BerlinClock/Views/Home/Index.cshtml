@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>My Berlin Clock</h1>
+    <p class="lead">The Mengenlehreuhr (German for "Set Theory Clock") or Berlin-Uhr ("Berlin Clock") is the first public clock in the world </p>
+    <p><a target="_blank" href="https://en.wikipedia.org/wiki/Mengenlehreuhr" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Select Time</span>
+    </div>
+    <input type="text" id="input-a" value="" data-default="20:48" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+</div>
+<br />
+<button type="button" id="submitTime" class="btn btn-primary">Submit</button>
+
+<br />
+<div class="berlinClock">
+    <div class="row seconds"></div>
+    <div class="row hours-5"></div>
+    <div class="row hours-1"></div>
+    <div class="row mins-5"></div>
+    <div class="row mins-1"></div>
+</div>
+
+<style type="text/css">
+    .container {
+        padding: 20px;
+    }
+</style>
+<script src="http://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        
+        var input = $('#input-a');
+        input.clockpicker({
+            autoclose: true
+        });
+
+        function addLight(colour, row) {
+            $('<div/>', {
+                'class': 'block ' + colour
+            }).appendTo(row);
+        }
+
+        $("#submitTime").click(function () {
+            $(".seconds").empty();
+            $(".hours-5").empty();
+            $(".hours-1").empty();
+            $(".mins-5").empty();
+            $(".mins-1").empty();
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("GetClockUnitTimes", "Home")",
+                data: { inputTime: $('#input-a').val() },
+                dataType: "json",
+                success: function (response) {
+                    if (response.error) {
+                        alert(response.error);
+                    }
+                    else {
+                        for (var i = 0; i < 24; i++) {
+                            if (response[i].TimeUnit == "Seconds") {
+                                addLight(response[i].RowColor, $(".seconds"));
+                            }
+                            else if (response[i].TimeUnit == "Hours") {
+                                if (response[i].RowCount == 1)
+                                    addLight(response[i].RowColor, $(".hours-5"));
+                                else
+                                    addLight(response[i].RowColor, $(".hours-1"));
+                            }
+                            else if (response[i].TimeUnit == "Minutes") {
+                                if (response[i].RowCount == 3)
+                                    addLight(response[i].RowColor, $(".mins-5"));
+                                else
+                                    addLight(response[i].RowColor, $(".mins-1"));
+                            }
+                        }
+                    }
+                 
+                },
+                error: function (xhr, ajaxOptions, thrownError) { debugger; alert(xhr.responseText); }
+            });
+        });
+    });
+</script>
