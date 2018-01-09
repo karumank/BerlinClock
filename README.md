@@ -1,5 +1,7 @@
 # BerlinClock
 
+Demo available at: http://berlinclock.azurewebsites.com
+
 This application is developed using C#, jQuery, HTML, CSS primarily.
 
 For simplicity, I built this application on top of a template of .Net MVC application provided by Visual Studio.
@@ -21,7 +23,8 @@ HomeController - This has ViewResult to render our HTML page also the JsonResult
 
 BerlinClock/Models
 
-ClockUnit.cs - Used this as a common class to hold properties for all units. (Hours, minutes, seconds)
+ClockUnit.cs - Used this as a common class to hold properties for all units. (Hours, minutes, seconds) Also contains a static class Units.
+FieldColor.cs - Static class to hold colors for display of clock fields.
 
 BerlinClock/Services
 
