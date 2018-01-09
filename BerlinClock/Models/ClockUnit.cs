@@ -14,4 +14,11 @@ namespace BerlinClock.Models
         public string RowColor { get; set; }
     }
 
+    static class Units
+    {
+        public static string Hours = "Hours";
+        public static string Minutes = "Minutes";
+        public static string Seconds = "Seconds";
+    }
+
 }

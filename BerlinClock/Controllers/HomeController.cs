@@ -27,11 +27,11 @@ namespace BerlinClock.Controllers
                 //For seconds block lights
                 if (time.Seconds % 2 == 0)
                 {
-                    clockService.AddClockUnit(new ClockUnit() { TimeUnit = "Seconds", isActive = true, RowCount = 0, ColumnCount = 0, RowColor = "yellow" });
+                    clockService.AddClockUnit(new ClockUnit() { TimeUnit = Units.Seconds, isActive = true, RowCount = 0, ColumnCount = 0, RowColor = FieldColor.LightOn });
                 }
                 else
                 {
-                    clockService.AddClockUnit(new ClockUnit() { TimeUnit = "Seconds", isActive = false, RowCount = 0, ColumnCount = 0, RowColor = "NA" });
+                    clockService.AddClockUnit(new ClockUnit() { TimeUnit = Units.Seconds, isActive = false, RowCount = 0, ColumnCount = 0, RowColor = FieldColor.LightOff });
                 }
 
                 var hourColumnCount = 0;
@@ -44,11 +44,11 @@ namespace BerlinClock.Controllers
                     //otherwise light is off
                     if (time.Hours >= i)
                     {
-                        clockService.AddClockUnit(new ClockUnit() { TimeUnit = "Hours", isActive = true, RowCount = 1, ColumnCount = hourColumnCount, RowColor = "red" });
+                        clockService.AddClockUnit(new ClockUnit() { TimeUnit = Units.Hours, isActive = true, RowCount = 1, ColumnCount = hourColumnCount, RowColor = FieldColor.HourLightOn });
                     }
                     else
                     {
-                        clockService.AddClockUnit(new ClockUnit() { TimeUnit = "Hours", isActive = false, RowCount = 1, ColumnCount = hourColumnCount, RowColor = "NA" });
+                        clockService.AddClockUnit(new ClockUnit() { TimeUnit = Units.Hours, isActive = false, RowCount = 1, ColumnCount = hourColumnCount, RowColor = FieldColor.LightOff });
                     }
                     hourColumnCount++;
                 }
@@ -58,11 +58,11 @@ namespace BerlinClock.Controllers
                 {
                     if (time.Hours % 5 >= i)
                     {
-                        clockService.AddClockUnit(new ClockUnit() { TimeUnit = "Hours", isActive = true, RowCount = 2, ColumnCount = i, RowColor = "red" });
+                        clockService.AddClockUnit(new ClockUnit() { TimeUnit = Units.Hours, isActive = true, RowCount = 2, ColumnCount = i, RowColor = FieldColor.HourLightOn });
                     }
                     else
                     {
-                        clockService.AddClockUnit(new ClockUnit() { TimeUnit = "Hours", isActive = false, RowCount = 2, ColumnCount = i, RowColor = "NA" });
+                        clockService.AddClockUnit(new ClockUnit() { TimeUnit = Units.Hours, isActive = false, RowCount = 2, ColumnCount = i, RowColor = FieldColor.LightOff });
                     }
                 }
 
@@ -74,16 +74,16 @@ namespace BerlinClock.Controllers
                     {
                         if (i % 15 == 0)
                         {
-                            clockService.AddClockUnit(new ClockUnit() { TimeUnit = "Minutes", isActive = true, RowCount = 3, ColumnCount = minuteColumnCount, RowColor = "red" });
+                            clockService.AddClockUnit(new ClockUnit() { TimeUnit = Units.Minutes, isActive = true, RowCount = 3, ColumnCount = minuteColumnCount, RowColor = FieldColor.SplLightOn });
                         }
                         else
                         {
-                            clockService.AddClockUnit(new ClockUnit() { TimeUnit = "Minutes", isActive = true, RowCount = 3, ColumnCount = minuteColumnCount, RowColor = "yellow" });
+                            clockService.AddClockUnit(new ClockUnit() { TimeUnit = Units.Minutes, isActive = true, RowCount = 3, ColumnCount = minuteColumnCount, RowColor = FieldColor.LightOn });
                         }
                     }
                     else
                     {
-                        clockService.AddClockUnit(new ClockUnit() { TimeUnit = "Minutes", isActive = false, RowCount = 3, ColumnCount = minuteColumnCount, RowColor = "NA" });
+                        clockService.AddClockUnit(new ClockUnit() { TimeUnit = Units.Minutes, isActive = false, RowCount = 3, ColumnCount = minuteColumnCount, RowColor = FieldColor.LightOff });
                     }
 
                     minuteColumnCount++;
@@ -94,11 +94,11 @@ namespace BerlinClock.Controllers
                 {
                     if (time.Minutes % 5 >= i)
                     {
-                        clockService.AddClockUnit(new ClockUnit() { TimeUnit = "Minutes", isActive = true, RowCount = 4, ColumnCount = i, RowColor = "yellow" });
+                        clockService.AddClockUnit(new ClockUnit() { TimeUnit = Units.Minutes, isActive = true, RowCount = 4, ColumnCount = i, RowColor = FieldColor.LightOn });
                     }
                     else
                     {
-                        clockService.AddClockUnit(new ClockUnit() { TimeUnit = "Minutes", isActive = false, RowCount = 4, ColumnCount = i, RowColor = "NA" });
+                        clockService.AddClockUnit(new ClockUnit() { TimeUnit = Units.Minutes, isActive = false, RowCount = 4, ColumnCount = i, RowColor = FieldColor.LightOff });
                     }
                 }
                 return Json(clockService.GetAllClockUnits(), JsonRequestBehavior.AllowGet);
