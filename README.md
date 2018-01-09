@@ -19,3 +19,14 @@ BerlinClock/Controllers
 
 HomeController - This has ViewResult to render our HTML page also the JsonResult which returns the values of clock units with respect to the input.
 
+BerlinClock/Models
+
+ClockUnit.cs - Used this as a common class to hold properties for all units. (Hours, minutes, seconds)
+
+BerlinClock/Services
+
+ClockService.cs - Created this using Singleton Design Pattern to hold the collection of unit values across the application.
+
+
+
+
